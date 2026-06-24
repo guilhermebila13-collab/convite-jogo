@@ -40,9 +40,28 @@
 
         p {
             color: #555;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             font-size: 1.1rem;
             line-height: 1.5;
+        }
+
+        /* Estilização da caixa de texto do nome */
+        .campo-nome {
+            width: 100%;
+            max-width: 250px;
+            padding: 12px 15px;
+            font-size: 1rem;
+            border: 2px solid #009739; /* Borda Verde */
+            border-radius: 10px;
+            margin-bottom: 25px;
+            outline: none;
+            text-align: center;
+            transition: border-color 0.2s ease;
+        }
+
+        .campo-nome:focus {
+            border-color: #fedd00; /* Muda para amarelo ao clicar */
+            box-shadow: 0 0 5px rgba(254, 221, 0, 0.5);
         }
 
         .buttons {
@@ -88,9 +107,11 @@
         <h1>Bora assistir ao jogo do Brasil aqui em casa hoje (24/06)? 🇧🇷⚽</h1>
         <p>Os petiscos e as bebidas já estão no esquema, só falta você confirmar! E aí, você vem?</p>
         
+        <input type="text" id="nomeInput" class="campo-nome" placeholder="Digite seu nome">
+
         <div class="buttons">
             <button id="sim" onclick="aceitou()">BORA! 🍻</button>
-            <button id="nao" onmouseover="fugir()" ontouchstart="fugirComToque(event)">NÃO ❌</button>
+            <button id="nao" onmouseover="fugir()" ontouchstart="fugirComToque(event)">NÃO, irei secar o Brasil sozinho ❌</button>
         </div>
     </div>
 
@@ -101,18 +122,15 @@
             const larguraTela = window.innerWidth;
             const alturaTela = window.innerHeight;
 
-            // Garante que o botão mude de lugar sem sair da área visível da tela
             const novoX = Math.random() * (larguraTela - botaoNao.offsetWidth);
             const novoY = Math.random() * (alturaTela - botaoNao.offsetHeight);
 
-            // Muda para posição fixa para começar a fugir
             botaoNao.style.position = 'fixed';
             botaoNao.style.left = novoX + 'px';
             botaoNao.style.top = novoY + 'px';
         }
 
         function fugirComToque(event) {
-            // Impede que o toque seja interpretado como um clique e siga o fluxo normal
             if (event.cancelable) {
                 event.preventDefault();
             }
@@ -120,12 +138,22 @@
         }
 
         function aceitou() {
-            // Mensagem de sucesso confirmando o local e a data
-            alert("Aeeeee! Presença confirmada! Te espero aqui em casa mais tarde. Traz o otimismo que hoje tem vitória! 🥳🇧🇷");
+            // Pega o valor digitado e remove espaços em branco extras
+            const nomeDigitado = document.getElementById('nomeInput').value.trim();
+            let mensagemFinal = "";
+
+            // Verifica se o usuário preencheu o nome
+            if (nomeDigitado !== "") {
+                mensagemFinal = `Aeeeee, ${nomeDigitado}! Presença confirmada! Te espero aqui em casa mais tarde. Traz o otimismo que hoje tem vitória! 🥳🇧🇷`;
+            } else {
+                mensagemFinal = "Aeeeee! Presença confirmada! Te espero aqui em casa mais tarde. Traz o otimismo que hoje tem vitória! 🥳🇧🇷";
+            }
             
-            // Opcional: Se quiser que abra direto no seu WhatsApp avisando que a pessoa aceitou, 
-            // mude o número abaixo e tire as duas barras (//) da linha seguinte:
-            // window.location.href = "https://wa.me/55DDDSEUNUMERO?text=Confirmado!%20Tô%20chegando%20aí%20na%20sua%20casa%20mais%20tarde%20pro%20jogo!%20🇧🇷⚽";
+            alert(mensagemFinal);
+            
+            // Opcional: Se usar o redirecionamento do WhatsApp, você também pode passar o nome por lá:
+            // const textoZap = nomeDigitado !== "" ? `Confirmado! Aqui é o ${nomeDigitado}, tô chegando aí mais tarde pro jogo! 🇧🇷⚽` : "Confirmado! Tô chegando aí mais tarde pro jogo! 🇧🇷⚽";
+            // window.location.href = "https://wa.me/55DDDSEUNUMERO?text=" + encodeURIComponent(textoZap);
         }
     </script>
 
