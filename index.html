@@ -47,10 +47,10 @@
 
         .buttons {
             display: flex;
-            justify-content: center;
-            gap: 20px;
+            flex-direction: column; /* Organiza os botões em coluna */
+            align-items: center; /* Centraliza os botões */
+            gap: 15px; /* Espaço entre os botões */
             position: relative;
-            height: 50px;
         }
 
         button {
@@ -61,6 +61,8 @@
             border-radius: 10px;
             cursor: pointer;
             transition: transform 0.1s ease;
+            width: 100%; /* Botões ocupam a largura total do container */
+            max-width: 200px; /* Largura máxima para não ficarem muito grandes */
         }
 
         #sim {
@@ -75,8 +77,7 @@
         #nao {
             background-color: #002776; /* Azul Brasil */
             color: white;
-            position: absolute;
-            left: 55%;
+            position: relative; /* Começa na posição normal */
         }
     </style>
 </head>
@@ -103,6 +104,7 @@
             const novoX = Math.random() * (larguraTela - botaoNao.offsetWidth);
             const novoY = Math.random() * (alturaTela - botaoNao.offsetHeight);
 
+            // Muda para posição fixa para começar a fugir
             botaoNao.style.position = 'fixed';
             botaoNao.style.left = novoX + 'px';
             botaoNao.style.top = novoY + 'px';
