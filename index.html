@@ -78,6 +78,7 @@
             background-color: #002776; /* Azul Brasil */
             color: white;
             position: relative; /* Começa na posição normal */
+            touch-action: none; /* Desativa ações de toque padrão para este elemento */
         }
     </style>
 </head>
@@ -89,7 +90,7 @@
         
         <div class="buttons">
             <button id="sim" onclick="aceitou()">BORA! 🍻</button>
-            <button id="nao" onmouseover="fugir()" onclick="fugir()" ontouchstart="fugir()">NÃO ❌</button>
+            <button id="nao" onmouseover="fugir()" ontouchstart="fugirComToque(event)">NÃO ❌</button>
         </div>
     </div>
 
@@ -108,6 +109,14 @@
             botaoNao.style.position = 'fixed';
             botaoNao.style.left = novoX + 'px';
             botaoNao.style.top = novoY + 'px';
+        }
+
+        function fugirComToque(event) {
+            // Impede que o toque seja interpretado como um clique e siga o fluxo normal
+            if (event.cancelable) {
+                event.preventDefault();
+            }
+            fugir();
         }
 
         function aceitou() {
