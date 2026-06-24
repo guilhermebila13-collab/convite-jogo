@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmar Presença - Jogo do Brasil! 🇧🇷⚽</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f9f4; /* Fundo verde bem clarinho */
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 151, 57, 0.15);
+            border: 3px solid #fedd00; /* Borda amarela */
+            max-width: 90%;
+            width: 420px;
+        }
+
+        h1 {
+            color: #009739; /* Verde Brasil */
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        p {
+            color: #555;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            height: 50px;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+        }
+
+        #sim {
+            background-color: #009739; /* Verde */
+            color: white;
+        }
+
+        #sim:hover {
+            transform: scale(1.1);
+        }
+
+        #nao {
+            background-color: #002776; /* Azul Brasil */
+            color: white;
+            position: absolute;
+            left: 55%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Bora assistir ao jogo do Brasil aqui em casa hoje (24/06)? 🇧🇷⚽</h1>
+        <p>Os petiscos e as bebidas já estão no esquema, só falta você confirmar! E aí, você vem?</p>
+        
+        <div class="buttons">
+            <button id="sim" onclick="aceitou()">BORA! 🍻</button>
+            <button id="nao" onmouseover="fugir()" onclick="fugir()" ontouchstart="fugir()">NÃO ❌</button>
+        </div>
+    </div>
+
+    <script>
+        function fugir() {
+            const botaoNao = document.getElementById('nao');
+            
+            const larguraTela = window.innerWidth;
+            const alturaTela = window.innerHeight;
+
+            // Garante que o botão mude de lugar sem sair da área visível da tela
+            const novoX = Math.random() * (larguraTela - botaoNao.offsetWidth);
+            const novoY = Math.random() * (alturaTela - botaoNao.offsetHeight);
+
+            botaoNao.style.position = 'fixed';
+            botaoNao.style.left = novoX + 'px';
+            botaoNao.style.top = novoY + 'px';
+        }
+
+        function aceitou() {
+            // Mensagem de sucesso confirmando o local e a data
+            alert("Aeeeee! Presença confirmada! Te espero aqui em casa mais tarde. Traz o otimismo que hoje tem vitória! 🥳🇧🇷");
+            
+            // Opcional: Se quiser que abra direto no seu WhatsApp avisando que a pessoa aceitou, 
+            // mude o número abaixo e tire as duas barras (//) da linha seguinte:
+            // window.location.href = "https://wa.me/55DDDSEUNUMERO?text=Confirmado!%20Tô%20chegando%20aí%20na%20sua%20casa%20mais%20tarde%20pro%20jogo!%20🇧🇷⚽";
+        }
+    </script>
+
+</body>
+</html>
